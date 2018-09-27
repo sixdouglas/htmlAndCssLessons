@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?> // <1>
+<magasins> // <2>
+    <magasin> // <3>
+        <id>123456</id> // <4>
+        <name>Auchan Drive</name>
+        <adresses>
+            <adresse type="livraison"> // <5>
+                <ligne1>M. Durand</ligne1>
+                <ligne2>14 rue du bourg</ligne2>
+                <cp>59000</cp>
+                <ville>Lille</ville>
+                <pays /> // <6>
+            </adresse>
+            <adresse type="facturation">
+                <ligne1>Service Comptable</ligne1>
+                <ligne2>41 rue nationale</ligne2>
+                <cp>59800</cp>
+                <ville>Lille</ville>
+                <pays />
+            </adresse>
+        </adresses>
+    </magasin>
+    <magasin>
+        ...
+    </magasin>
+</magasins>

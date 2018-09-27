@@ -1,0 +1,771 @@
+:icons: font
+:nofooter:
+:doctype: book
+:reproducible:
+ifdef::backend-html5[]
+:source-highlighter: highlightjs
+:stylesheet: style/my-style.css
+endif::[]
+ifdef::backend-pdf[]
+:source-highlighter: coderay
+endif::[]
+//:source-highlighter: rouge
+
+= Cours de HTML & CSS
+Auteur <dsix@auchan.com>
+v1.0, 2018-09-22
+:toc: left
+
+Le développement WEB permet de créer des sites internet comme celui-ci.
+
+.Site Internet
+[#img-web-site]
+[caption="Figure 1: ",link=https://www.isen.fr/campus/ecole-ingenieurs-lille/]
+image::images/site-internet.png[img-website,1122,933]
+
+== Préréquis
+
+=== Outils
+
+Je vous conseil d'utiliser un éditeur évolué :
+
+* Visual Studio Code : https://code.visualstudio.com/
+* Atom : https://atom.io/
+* NotePad++ (uniquement pour Windows) : https://notepad-plus-plus.org/
+
+Il existe également des environnements de développement plus évolués mais plus gourmand :
+
+* PHP Storm : https://www.jetbrains.com/phpstorm/?fromMenu
+* Eclipse : https://www.eclipse.org/downloads/
+* Netbeans : https://netbeans.org/downloads/
+
+=== Architecture
+
+==== Client / Serveur
+
+Un navigateur Internet doit accéder à un serveur pour récupérer le contenu à afficher.
+
+.Client - Serveur
+[#img-client-serveur]
+[caption="Figure 2: "]
+image::images/client-serveur.png[img-client-serveur]
+
+. le client, (navigateur Web, appel le serveur
+. le serveur passe le relais au moteur PHP
+. le moteur PHP récupère les informations dont il a besoin à la BDD
+. la BDD répond
+. le moteur PHP crée le HTML
+. le serveur web répond au client
+
+l'URL est sous la forme : http://www.isen.fr
+
+==== Local
+
+Le navigteur web accède directement au contenu du disque dur de l'ordinateur pour récupérer le contenu à afficher.
+
+.Local
+[#img-local]
+[caption="Figure 3: "]
+image::images/local.png[img-local]
+
+l'URL est sous la forme : file:///opt/dev/cours_html/index.html
+
+IMPORTANT: Dans le cadre du cours nous allons travailler en local, sans serveur. Nous allons donc utiliser un editeur de texte et un navigateur Web
+pour visualiser nos modifications.
+
+=== Le XML
+
+Le XML est un type de fichier texte structuré. Il est composé d'éléments (des noeuds) imbriqués les uns dans les autres. 
+
+.sample.xml
+[#sample.xml]
+[source,xml]
+----
+include::sample/stores.xml[]
+----
+<1> Le **version** : pour préciser la version de XML et l'encodage du fichier
+<2> L’élément **magasins** : c'est le noeud racine il est **unique**
+<3> L’élément **magasin** : le noeud sera répété autant de fois qu'il y a un magasin
+<4> L’élément **id** : noeud simple ne contenant que du texte
+<5> L’élément **adresse** : noeud qui possède un [.underline]#attribut#, ici le type
+<6> L'élément **pays** : noeud qui n'a pas de valeur ici.
+
+TIP: Tout élément doit être fermé.
+
+IMPORTANT: Attention à l'imbrication correcte des éléments.
+
+==== Exercice 1
+
+Créez un document XML qui représente un élève. Vous ajouterez les informations suivantes :
+
+* nom
+* prénom
+* date de naissance
+
+==== Exercice 2
+
+Créez un document XML qui représente un groupe d'élèves. Vous ferez apparaitre les informations suivantes :
+
+* nom du groupe
+* liste des **élève**s
+
+==== Exercice 3
+
+Créez un document XML qui représente une classe. Vous ajouterez les informations suivantes :
+
+* niveau
+* matiere
+* nom du professeur
+* liste des **groupe**s
+
+Vous ajouterez également l'[.underline]#attribut# année.
+
+== Présentation générale
+
+=== Séparation des rôles
+
+Dans une page WEB il y a __le contenu__, ce que vous voulez dire, et __la mise en forme__, comment vous le représentez visuellement.
+Quand vous allez créer vos pages web, il vous faudra séparer les deux ; chacun son rôle !
+
+==== Exercice
+
+.Séparation des rôles
+[#img-content-style]
+[caption="Figure 4: "]
+image::images/content-style.png[img-content-style]
+
+Dans cet exemple relever ce qui relève du la forme et ce qui relève du fond.
+
+=== CSS - Cascading StyleSheets
+
+Le CSS est l'outil de changement de style des éléments HTML.
+
+[source,css]
+----
+include::sample/simple.1.css[]
+----
+<1> nom du tag : tag que lequel sera appliqué le style
+<2> style : éléments du style que l'on veut appliquer
+
+=== HTML - HyperText Markup Language
+
+Les documents HTML sont de simples des documents XML mais respectant une norme encore plus contraignante. 
+Cette norme est établie par un consortium (un ensemble de sociétés), le https://www.w3.org/[World Wide Web Consortium (W3C)]
+
+.index.html
+[#index.html]
+[source,xml]
+----
+include::sample/index.html[]
+----
+<1> Le **doctype** : pour préciser le language
+<2> L’élément **html** : tout le contenu de la page sera dans les balises
+<3> L’élément **head** : contient les meta informations de la page
+<4> L’élément **meta** : différentes informations peuvent être définies. Ici c'est le jeu de caractères
+<5> L’élément **title** : contient le titre de la fenêtre
+<6> L’élément **link** : permet de lier des fichiers externes au document courant. Ici un fichier CSS
+<7> L’élément **body** : contient le contenu réel de la page
+
+== Construction du fichier HTML
+
+La norme HTML définis un grand nombre de balises pour vous permettre de définir votre présentation :
+
+* les titres `<Hx></Hx>`
+* le paragraphe `<p></p>`
+* le retour à la ligne `<br />`
+* les tableaux `<table></table>`
+* les listes `<ul></ul>` / `<ol></ol>`
+* l'image `<img />`
+* le lien `<a></a>`
+* caractères spéciaux
+
+=== Les Titres
+
+Le principe des balises `<Hx></Hx>` est d'établir une hiérarchie dans la division de la page.
+Il existe donc 6 balises, de 1 à 6, avec 1 le titre le plus important.
+
+IMPORTANT: Les navigateurs apportent d'eux même une différenciation entre l'importance des titres
+
+.titres.html
+[#titres.html]
+[source,html]
+----
+include::sample/titres.html[]
+----
+
+.Titres
+[#img-titres]
+[caption="Figure 5: "]
+image::images/titres.png[img-titres]
+
+Les balises de titres sont utilisés par les moteurs de recherche pour donner plus d'importance au texte 
+du titre dans les résultats des recherches.
+
+=== Le paragraphe
+
+La balise `<p></p>` est le symbole de démarcation des paragraphes. Dans le texte de vos HTML, vous pouvez mettre autant de
+retour à la ligne que vous voulez.
+
+.paragraphes.html
+[#paragraphes.html]
+[source,html]
+----
+include::sample/paragraphes.html[]
+----
+
+.Paragraphes
+[#img-paragraphes]
+[caption="Figure 6: "]
+image::images/paragraphes.png[img-paragraphes]
+
+==== Exercice 1
+
+Créez une page HTML avec :
+
+* comme titre de l'onglet : "Le Web c'est le pied"
+* un titre principal contenant : "Développement Web"
+* un sous titre contenant : "C'est cool !"
+* un paragraphe contenant : "Le développement Web permet de faire beaucoup de chose et j'adore cela."
+
+==== Exercice 2
+
+Créez une page HTML ressemblant à celle-ci :
+
+.Exercice 2 Paragraphes
+[#img-exercice2-paragraphes]
+[caption="Figure 7: "]
+image::images/exercice2-paragraphes.png[img-exercice2-paragraphes]
+
+=== Le retour à la ligne
+
+Comme nous l'avons vu, les retours à la lignes, dans le HTML, ne sont pas traduit visuellement par un retour à la ligne dans le texte.
+Pour gérer manuellement ces retours à la lignes nous avons à notre disposition une balise spécifique : `<br />`. Comme vous le voyez,
+cette balise n'a pas de contenu ; un retour à la ligne est un retour à la ligne.
+
+.line-break.html
+[#line-break.html]
+[source,html]
+----
+include::sample/line-break.html[]
+----
+
+.Retour à la ligne
+[#img-line-break]
+[caption="Figure 8: "]
+image::images/line-break.png[img-line-break]
+
+=== Les tableaux
+
+Un tableau est un moyen simple d'aligner des objets. Mais les tableaux peuvent être parfois très compliqués, avec un entête, un pieds, 
+des cellules fusionnées. 
+
+IMPORTANT: Il faut utiliser les tableaux en tant que tableau et non en tant qu'outils de mise en forme !
+
+.tableau.html
+[#tableau.html]
+[source,html]
+----
+include::sample/tableau.html[]
+----
+
+.tableau.css
+[#tableau-css.css]
+[source,css]
+----
+include::sample/tableau.css[]
+----
+
+.Tableau
+[#img-tableau]
+[caption="Figure 9: "]
+image::images/tableau.png[img-tableau]
+
+==== Exercice 1
+
+Créez une page HTML ressemblant à celle-ci :
+
+.Exercice 1 tableau
+[#img-exercice1-tableau]
+[caption="Figure 10: "]
+image::images/exercice1-tableau.png[img-exercice1-tableau]
+
+.exercice1-tableau.css
+[#exercice1-tableau-css.css]
+[source,css]
+----
+include::sample/exercice1-tableau.css[]
+----
+
+=== Les listes
+
+Pour créer une liste il faut d'abord savoir si vous voulez une liste numérotée ou simplement avec des puces.
+
+.liste.html
+[#liste.html]
+[source,html]
+----
+include::sample/liste.html[]
+----
+<1> `<ul>`: unordered list
+<2> `<ol>`: ordered list
+<3> `<li>`: list item
+
+.Liste
+[#img-liste]
+[caption="Figure 11: "]
+image::images/liste.png[img-liste]
+
+TIP: la seule différence est entre les balises : `<ul>` / `<ol>`
+
+Sur les listes numérotées (valise `<ol>`) il est possible de changer la numérotation en utilisant des lettres avec  l'attribut `type="A"` ou `type="a"`
+ou la numérotation en chiffres romains l'attribut `type="I"` ou `type="i"`
+
+.Liste-1
+[#img-liste-1]
+[caption="Figure 12: "]
+image::images/liste.1.png[img-liste-1]
+
+=== L'image
+
+Quand on veut ajouter une image dans une page HTML il faut utiliser la balise `<img />`.
+
+.image.html
+[#image.html]
+[source,html]
+----
+include::sample/image.html[]
+----
+
+.Image
+[#img-image]
+[caption="Figure 13: "]
+image::images/image.png[img-image]
+
+TIP: Les images peuvent, dans certains cas être remplacé par un texte (pour les non voyants par exemple). 
+Dans ce cas c'est le contenu du l'attribut `alt` qui sera utilisé.
+
+TIP: Il peut être intéressant d'avoir une information complémentaire sur l'image via une info bulle lorsque la souris est au dessus de l'image. 
+Dans ce cas c'est le contenu du l'attribut `title` qui sera utilisé.
+
+=== Le lien
+
+Quand on veut ajouter un lien dans une page HTML il faut utiliser la balise `<a></a>`.
+
+.lien.html
+[#lien.html]
+[source,html]
+----
+include::sample/lien.html[]
+----
+
+.Lien
+[#img-lien]
+[caption="Figure 14: "]
+image::images/lien.png[img-lien]
+
+TIP: il est possible un lien vers un contenu de la même page en utilisant un attribut `id` en tant qu'ancre
+et la référence de l'ancre dans le lien se fait alors un `#`.
+
+=== Les caractères spéciaux
+
+Certains caractères sont plus réservés, d'autres n'apparaissent pas sur les claviers. Il existe donc une syntaxe particuliaire pour ces caractères.
+
+.Caracteres
+[#img-caracteres]
+[caption="Figure 15: "]
+image::images/caracteres.png[img-caracteres]
+
+=== Validation
+
+Pour qu'un document HTML soit déclaré valide il faut qu'il respecte toutes les règles de base de la normal.
+Il existe des validateurs pour cela. http://validator.w3.org/[Voici un validateur online.]
+
+=== [[Formulaires, formulaires]]Les formulaires
+
+Le but d'un formulaire est de faire parvenir des informations au serveur. 
+
+.Client - Serveur
+[#img-client-serveur-2]
+[caption="Figure 2: "]
+image::images/client-serveur.png[img-client-serveur]
+
+. **le client, (navigateur Web, appel le serveur**
+. le serveur passe le relais au moteur PHP
+. le moteur PHP récupère les informations dont il a besoin à la BDD
+. la BDD répond
+. le moteur PHP crée le HTML
+. le serveur web répond au client
+
+En HTML un formulaire est à considérer comme un block complet avec un délimiteur la balise `<form> ... </form>` 
+et les éléments le composant : `<input> ... </input>`.
+
+.formulaire.html
+[#formulaire.html]
+[source,html]
+----
+include::sample/formulaire.html[]
+----
+
+.Formulaire
+[#img-formulaire]
+[caption="Figure 14: "]
+image::images/formulaire.png[img-formulaire]
+
+Il existe un certain nombre d'élements possibles dans les formulaires:
+
+* label
+* texte simple
+* texte long
+* mot de passe
+* case à cocher
+* champs caché
+* fichier
+* radio boutton
+* liste déroulante
+* bouton simple
+* bouton de validation
+* bouton de reset
+
+==== Formulaire
+
+La balise `form` est celle qui permet de délimiter le formulaire. 
+Pour que les informations arrivent correctement au serveur Web, il faut :
+
+- donner la destination `action`
+-- c'est l'URL de destination du formulaire (`http://www.monsite.fr/save`)
+- donner la `method`
+-- soit `GET`: les informations seront transmisent dans l'URL (`http://www.monsite.fr/save?nom=six&prenom=douglas`)
+-- soit `POST`: les informations seront transmisent à part, dans la requête
+
+==== Label
+
+Le `label` est un élément qui décrit le champs auquel il est associé.
+
+Attribut important: 
+
+* for: permet de savoir vers quel `ìnput` on va pointer.
+
+==== Texte simple
+
+Le `text` est le champs le plus commun. Il permet de saisir une petite quantité de texte, un nom, un prénom...
+
+* value: valeur par défaut
+
+==== Texte long
+
+Le `textarea` est le champs de saisie des textes long, comme des paragraphes complets.
+
+* cols: taille du champs de saisie en nombre de caractères pour les colonnes
+* rows: taille du champs de saisie en nombre de caractères pour les lignes
+
+==== Mode de passe
+
+Le `password` va permettre de saisir un texte qui n'est pas lisible à l'écran. 
+
+* value: valeur par défaut
+
+==== Case à cocher
+
+Le `checkbox` est la case à cocher du formaulaire. 
+
+* value: valeur qui sera renvoyée au serveur si la case est cochée.
+* checked: quand on veut pré cocher une case
+
+TIP: Seul les valeurs des cases cochées sont renvoyées au serveur.
+
+==== Champ caché
+
+Le `hidden` est un champ qui n'est pas visible dans le formulaire mais qui permet de faire passer des valeurs
+d'un accès au serveur à l'autre, par exemple le numéro de client, l'action en cours.
+
+==== Fichier
+
+L'élément `File` va faire apparaitre dans le navigateur un bouton pour ouvrir une boite de dialogue pour sélectionner
+un fichier en local, sur l'ordinateur.
+
+IMPORTANT: Il faut alors que le formulaire soit en `method="post"` et ajouter l'attribut `enctype="multipart/form-data"`
+
+==== Radio bouton
+
+L'élément `radio` permet la sélection **exclusive** d'un élément parmit toutes les options possibles.
+
+IMPORTANT: pour que l'exclusion se fasse correctement il faut que les éléments aient le même `name`.
+
+==== Liste déroulante
+
+Une liste déroulant se décompose en plusieurs élement, à l'image d'une liste `<ul><li></li></ul>`, ici on utilise les élements
+`<select><option></option></select>`
+
+TIP: l'attribut `selected` sur une élément `<option>` permet de le rendre pré-sélectionné.
+
+WARNING: si aucune valeur n'est précisé dans `<option>`, alors la valeur renvoyée sera le contenu de l'option: `<option>Le joli bateau bleu</option>`
+
+==== Bouton simple
+
+L'élément `button` est là pour créer un bouton dont il faut implémenter la logique en javascript.
+
+==== Bouton de validation
+
+L'élément `submit` est le bouton qui va réellement déclencher l'envoie du formulaire au serveur.
+
+==== Bouton de reset
+
+L'élément `reset` va vider le contenu des champs, décocher les cases cochées, les radio buttons et remettre les valeurs par défaut
+quand il y en a.
+
+== Allons plus loin
+
+Nous avons déjà les principales balises. En voici deux qui permettent de faire des merveilles quand elles sont liées au CSS.
+
+* `<span></span>`
+* `<div></div>` 
+
+=== Les blocks SPAN
+
+Le span est un élément de type **inline**. C'est à dire qu'il s'insère dans d'autres éléments sans en changer le comportement.
+Nous nous en servons pour compléter / modifier un sous élément.
+
+.span.html
+[#span.html]
+[source,html]
+----
+include::sample/span.html[]
+----
+
+.Span
+[#img-span]
+[caption="Figure 15: "]
+image::images/span.png[img-span]
+
+=== Les blocks DIV
+
+Le span est un élément de type **block**. C'est à dire qu'il entoure d'autres éléments sans en changer le comportement.
+Nous nous en servons pour compléter / modifier un ensemble d'éléments.
+
+.div.html
+[#div.html]
+[source,html]
+----
+include::sample/div.html[]
+----
+
+.Div
+[#img-div]
+[caption="Figure 16: "]
+image::images/div.png[img-div]
+
+== le CSS
+
+Maintenant que nous avons vu comment créer les pages HTML et y ajouter du contenu. Nous allons mettre le tout en forme.
+
+=== Les sélecteurs
+
+Pour être capable d'appliquer le style sur un élément, il nous faut le sélectionner. En CSS il y a trois possibilités de sélection d'un élément :
+
+. la balise HTML
+. la classe
+. l'id
+
+Voici une mise en forme que nous allons réaliser alternativement avec les trois méthodes de sélection à notre disposition :
+
+.Selecteur-css
+[#img-selecteur-css]
+[caption="Figure 17: "]
+image::images/selecteur-css.png[img-selecteur-css]
+
+==== la balise HTML
+
+Pour utiliser les balises HTML il suffit d'utiliser le nom de la balise.
+
+.balise-html.html
+[#balise-html.html]
+[source,html]
+----
+include::sample/balise-html.html[]
+----
+
+.balise-html.css
+[#balise-html-css.css]
+[source,css]
+----
+include::sample/balise-html.css[]
+----
+
+==== la classe
+
+Pour utiliser les classes, il faut ajouter l'attribut `class` dans le HTML, puis dans le fichier CSS on prefix le nom de la classe par un `.`
+
+.classe-html.html
+[#classe-html.html]
+[source,html]
+----
+include::sample/classe-html.html[]
+----
+
+.classe-html.css
+[#classe-html-css.css]
+[source,css]
+----
+include::sample/classe-html.css[]
+----
+
+==== l'ID
+
+Pour utiliser les ids, il faut ajouter l'attribut `id` dans le HTML, puis dans le fichier CSS on prefix le nom de l'id par un `#`
+
+.id-html.html
+[#id-html.html]
+[source,html]
+----
+include::sample/id-html.html[]
+----
+
+.id-html.css
+[#id-html-css.css]
+[source,css]
+----
+include::sample/id-html.css[]
+----
+
+WARNING: Un `id` doit etre unique dans le fichier HTML.
+
+==== Sélection Précise
+
+.checkedboard.html
+[#checkedboard.html]
+[source,html]
+----
+include::sample/checkedboard.html[]
+----
+
+.checkedboard.css
+[#checkedboard-css.css]
+[source,css]
+----
+include::sample/checkedboard.css[]
+----
+
+.Checkedboard
+[#img-checkedboard]
+[caption="Figure 18: "]
+image::images/checkedboard.png[img-checkedboard]
+
+=== La mise en forme
+
+==== Les tailles
+
+==== Les couleurs
+
+Il existe plusieurs façons de définir une couleur en HTML:
+
+* avec le nom de la couleur
+* avec les composantes RGB (Red Green Blue) exprimées en décimal de 0 à 255
+* avec les composantes RGB (Red Green Blue) exprimées en héxadécimal de 00 à FF
+* avec une transparence (couche alpha)
+
+.color.html
+[#color.html]
+[source,html]
+----
+include::sample/color.html[]
+----
+
+.color.css
+[#color-css.css]
+[source,css]
+----
+include::sample/color.css[]
+----
+
+.Color
+[#img-color]
+[caption="Figure 19: "]
+image::images/color.png[img-color]
+
+==== les Fonts
+
+Il existe différents types de polices de caractères dont on peut faire varier la police, la taille, le poids ou le style. 
+
+.font.html
+[#font.html]
+[source,html]
+----
+include::sample/font.html[]
+----
+
+.font.css
+[#font-css.css]
+[source,css]
+----
+include::sample/font.css[]
+----
+
+.Font
+[#img-font]
+[caption="Figure 20: "]
+image::images/font.png[img-font]
+
+https://fonts.google.com/
+
+Il existe d'autres attributs des Fonts :
+
+* `font-size` : taille de la police
+* `font-weight` : texte en gras : `bold`
+* `font-style` : text en italique : `italic`
+
+==== Le Text
+
+Il existe un certain nombre de propriété CSS permettant de transformer la façon dont le text est affiché:
+
+* `text-align` : `left`, `right`, `center`, `justify`
+* `text-transform` : `lowercase`, `uppercase`, `capitalize`
+* `text-decoration` : `underline`, `overline`, `line-through`
+* `text-indent` : pixel value (+ or -) ou pourcentage
+
+=== Le modèle de boite
+
+== Le HTML 5
+
+=== Nouveaux Input
+
+Le HTML5 a ajouté quelques types d'input (retour ici pour les éléments avant le HTML5 : <<Formulaires, Les formulaires>>) :
+
+* color
+* date
+* datetime-local
+* month
+* week
+* time
+* number
+* range
+* search
+* tel
+* url
+* email
+
+Chacun de ces type de champs apporte une facilité, un confort de saisie pour l'utilisateur, comme pour le développeur. 
+L'utilisateur va se voir proposé par le navigateur les données qu'il a déjà saisies dans un champs équivalent. Comme c'est
+le navigateur qui se charge de la présentation de l'élément, le visuel est en accord avec le système d'exploitation. Pour le développeur,
+il n'aura pas à redévelopper de composant spécifique.
+
+=== Nouvelles Sections
+
+Le HTML 5 apporte de nouveaux bloc dont le nom permet de donner un sens au contenu de vos pages. Voici les nouvelles balises :
+
+* article
+* section
+* nav
+* aside
+* header
+* footer
+
+Et voici l'usage que l'on devrait en avoir :
+
+.Html 5 Sementic Sections
+[#img-html5-sementic-sections]
+[caption="Figure 14: "]
+image::images/html5-sementic-elements.png[img-html5SementicSections]
+
+== Responsive Design
+
+== Les Framework HTML - CSS

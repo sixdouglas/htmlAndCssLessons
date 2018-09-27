@@ -1,0 +1,52 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid firebrick;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    background-color: #cf3d72;
+}
+
+tr {
+    height: 20px;
+}
+.double-size {
+    height: 40px;
+}
+
+thead tr th:first-child {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+}
+
+tbody tr th {
+    text-align: right;
+    background-color: transparent;
+    font-weight: 500;
+    color: #535353;
+}
+
+.orange {
+    background-color: #ff8a23;
+}
+.dark-blue {
+    background-color: #567bd2;
+}
+.light-blue {
+    background-color: #13baff;
+}
+.green {
+    background-color: #669933;
+}

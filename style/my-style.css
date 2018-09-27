@@ -1,0 +1,16 @@
+@import 'style/foundation.css';
+
+#header, #content {
+    max-width: 90%;
+}
+
+.content a.image, .content img {
+    display: block;
+    margin: auto;
+}
+
+@media only screen and (min-width: 1280px) {
+    .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] {
+        font-size: 0.90625em;
+    }
+}

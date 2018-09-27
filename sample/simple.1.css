@@ -1,0 +1,10 @@
+body { // <1>
+    color: #F0F0F0; // <2>
+    background: #600;
+    font-family: Arial, sans;
+  }
+
+  .green {
+    background-color: lightgreen;
+  }
+  

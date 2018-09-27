@@ -1,0 +1,16 @@
+body {
+  font-family: sans-serif;
+}
+
+.titre {
+  color: green;
+}
+
+.soustitre {
+  color: blueviolet;
+  text-decoration: underline deeppink;
+}
+
+.paragraphe {
+  text-transform: uppercase;
+}

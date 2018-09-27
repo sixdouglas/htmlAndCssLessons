@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groupe nom="CIR1-A">
+    <eleves>
+        <eleve>
+            <nom>SIX</nom>
+            <prenom>Douglas</prenom>
+            <dateNaissance>22/09/1901</dateNaissance>
+        </eleve>
+        <eleve>
+            <nom>AUTRE</nom>
+            <prenom>Eleve</prenom>
+            <dateNaissance>23/09/1901</dateNaissance>
+        </eleve>
+    <eleves>
+</groupe>
