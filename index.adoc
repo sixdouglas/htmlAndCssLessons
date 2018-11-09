@@ -368,7 +368,7 @@ et la référence de l'ancre dans le lien se fait alors un `#`.
 
 === Les caractères spéciaux
 
-Certains caractères sont plus réservés, d'autres n'apparaissent pas sur les claviers. Il existe donc une syntaxe particuliaire pour ces caractères.
+Certains caractères sont plus réservés, d'autres n'apparaissent pas sur les claviers. Il existe donc une syntaxe particuliaire pour ces caractères. https://brajeshwar.github.io/entities/[Voici un site qui vous présente très bien cela].
 
 .Caracteres
 [#img-caracteres]
@@ -652,7 +652,21 @@ image::images/checkedboard.png[img-checkedboard]
 
 === La mise en forme
 
-==== Les tailles
+==== Les unités
+
+En HTML, il existe plusieurs système d'unité possible:
+
+* Unités absolues
+** `px` : pixels
+** `pt` : points
+* Unités relatives
+** `rem` : taille de police relative à la taille définie pour l'élément root (HTML ou BODY)
+** `em` : taille de police relative à la taille définie pour l'élément courant
+** `vw` : taille relative à 1% de la largeur du **viewport**
+** `vh` : taille relative à 1% de la hauteur du **viewport**
+** `%` : taille relative à la taille de l'élément parent
+
+TIP: `em` ou `rem` sont pratiques pour définir des interfaces redimensionnables
 
 ==== Les couleurs
 
@@ -720,9 +734,53 @@ Il existe un certain nombre de propriété CSS permettant de transformer la faç
 * `text-align` : `left`, `right`, `center`, `justify`
 * `text-transform` : `lowercase`, `uppercase`, `capitalize`
 * `text-decoration` : `underline`, `overline`, `line-through`
-* `text-indent` : pixel value (+ or -) ou pourcentage
+* `text-indent` : veleur en pixel (négative ou positive) ou pourcentage
 
 === Le modèle de boite
+
+Tous les éléments HTML sont représentés sous forme de boites, qu'ils soient de type `inline` ou `block`.
+
+.Box
+[#img-boxing]
+[caption="Figure 21: "]
+image::images/boxing-model.png[img-boxing]
+
+On comprend, avec cette image, où se positionnent les marges (`margin`), les bordures (`border`) et les marges intérieures (`padding`) et le contenu 
+de l'élément.
+
+.box.html
+[#box.html]
+[source,html]
+----
+include::sample/box.html[]
+----
+
+.box.css
+[#box-css.css]
+[source,css]
+----
+include::sample/box.css[]
+----
+
+.Box
+[#img-box]
+[caption="Figure 22: "]
+image::images/box.png[img-box]
+
+Ici d'après la CSS, la `DIV` verte fait 450px de long et le `p` 1 en fait 400px. 
+Or en regardant le résultat le paragraphe déborde de la `DIV`. 
+La `width` de l'élément visible à l'écran est calculée comme ceci : 
+
+`marge gauche + bordure gauche + padding gauche + taille de l'élément + padding droit + bordure droite + marge droite`
+
+Ce qui donne ici : 
+
+`0 + 5 + 60 + 400 + 60 + 5 + 0 = 530px`
+
+.BoxSizing
+[#img-box-sizing]
+[caption="Figure 23: "]
+image::images/box-sizing.png[img-box-sizing]
 
 == Le HTML 5
 
@@ -748,6 +806,11 @@ L'utilisateur va se voir proposé par le navigateur les données qu'il a déjà 
 le navigateur qui se charge de la présentation de l'élément, le visuel est en accord avec le système d'exploitation. Pour le développeur,
 il n'aura pas à redévelopper de composant spécifique.
 
+.FormulaireHtml5
+[#img-form-html5]
+[caption="Figure 24: "]
+image::images/form-html5.png[img-form-html5]
+
 === Nouvelles Sections
 
 Le HTML 5 apporte de nouveaux bloc dont le nom permet de donner un sens au contenu de vos pages. Voici les nouvelles balises :
@@ -765,7 +828,3 @@ Et voici l'usage que l'on devrait en avoir :
 [#img-html5-sementic-sections]
 [caption="Figure 14: "]
 image::images/html5-sementic-elements.png[img-html5SementicSections]
-
-== Responsive Design
-
-== Les Framework HTML - CSS

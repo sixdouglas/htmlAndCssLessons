@@ -6,6 +6,10 @@ body {
   background-color: lightgreen;
 }
 
+.red {
+  background-color: lightcoral;
+}
+
 .gras {
   font-weight: bold;
 }
