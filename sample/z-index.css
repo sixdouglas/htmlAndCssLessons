@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans;
+}
+
+.green {
+  background-color: lightgreen;
+  width: 210px;
+  height: 200px;
+  position: fixed;
+  top: 200px;
+  left: 200px;
+  z-index: 1;
+}
+.red {
+  background-color: lightcoral;
+  width: 210px;
+  height: 200px;
+  position: fixed;
+  top: 300px;
+  left: 200px;
+  z-index: 2;
+}
+.blue {
+  background-color: blue;
+  width: 210px;
+  height: 200px;
+  position: fixed;
+  top: 200px;
+  left: 300px;
+  z-index: 3;
+}
+.orange {
+  background-color: orange;
+  width: 210px;
+  height: 200px;
+  position: fixed;
+  top: 250px;
+  left: 250px;
+  z-index: 4;
+}
+.pink {
+  background-color: pink;
+  width: 210px;
+  height: 200px;
+  position: fixed;
+  top: 300px;
+  left: 300px;
+  z-index: 5;
+}

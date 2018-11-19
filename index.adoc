@@ -782,6 +782,59 @@ Ce qui donne ici :
 [caption="Figure 23: "]
 image::images/box-sizing.png[img-box-sizing]
 
+=== Le positionnement
+
+[#position-css.css]
+[source,css]
+----
+div {
+    position: static;
+    position: relative;
+    position: absolute;
+    position: fixed;
+    position: inherit;
+    position: sticky;
+}
+----
+
+* static : afficher dans l'ordre d'apparition dans le HTML
+* relative : relatif au parent
+* adsolute : à l'intérieur du parent
+* fixed : à l'intérieur du viewport
+* inherit : pour utiliser la même valeur de celle du parent
+* sticky : la position varie entre relative et fixed, selon le scroll
+
+=== La superposition
+
+[#zindex-css.css]
+[source,css]
+----
+div {
+    z-index: 2;
+}
+----
+
+Le z-index le plus élevé correspond à l'élément le plus haut de la pile.
+
+.z-index.html
+[#zindex.html]
+[source,html]
+----
+include::sample/z-index.html[]
+----
+
+.z-index.css
+[#z-index.css]
+[source,css]
+----
+include::sample/z-index.css[]
+----
+
+.Superposition
+[#img-z-index]
+image::images/z-index.png[img-zIndex]
+
+
 == Le HTML 5
 
 === Nouveaux Input
@@ -828,3 +881,62 @@ Et voici l'usage que l'on devrait en avoir :
 [#img-html5-sementic-sections]
 [caption="Figure 14: "]
 image::images/html5-sementic-elements.png[img-html5SementicSections]
+
+== Le responsive
+
+Le but est de pouvoir adapter au mieux le rendu de la page web au device sur lequel il s'affiche.
+
+.Responsive Desktop
+[#img-responsive-desktop]
+image::images/rwd_desktop.png[img-responsiveDesktop]
+
+.Responsive Tablette
+[#img-responsive-tablet]
+image::images/rwd_tablet.png[img-responsiveTablet]
+
+.Responsive téléphone
+[#img-responsive-phone]
+image::images/rwd_phone.png[img-responsivePhone]
+
+=== Les MediaQuery
+
+[#media-query-css.css]
+[source,css]
+----
+
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 0;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    body {
+        margin: 2px;
+    }
+}
+
+----
+
+== Les Framework
+
+Ce sont des points de départ, mais il faut faire attention ! Ils ne fonctionnent pas toujours comme on le veut et les
+adapter devient vite très compliqué.
+
+
+.Framework
+[#img-framework]
+image::images/framework.png[img-framework]
+
+
+=== Bootstrap
+
+Framework developpé par Twitter, rapide et répandu https://getbootstrap.com/docs/4.1/getting-started/introduction/[Boostrap] 
+est le plus connu
+
+=== Materialize
+
+A l'origine développé par Google https://materializecss.com/[Materialize] est un framework pensé pour rendre 
+plus simple la compréhension de la navigation.
+
+== Le JavaScript
+

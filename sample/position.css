@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans;
+}
+
+.container {
+  width: 910px;
+  margin: auto;
+  padding: 0;
+}
+.justify{
+  text-align: justify;
+}
+.float-left {
+  float: left;
+  margin: 5px;
+}
+.float-right {
+  float: right;
+  margin: 5px;
+}
+.relative {
+  position: relative;
+}
+.fixed-top-left {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  border: 1px solid lightgray;
+}
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  border: 1px solid lightgray;
+}
+.absolute-top-left {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 1px solid lightgray;
+}
+.absolute-bottom-right {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  border: 1px solid lightgray;
+}
