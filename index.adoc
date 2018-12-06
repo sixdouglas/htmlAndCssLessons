@@ -804,6 +804,26 @@ div {
 * inherit : pour utiliser la même valeur de celle du parent
 * sticky : la position varie entre relative et fixed, selon le scroll
 
+=== Le display
+
+[#display-css.css]
+[source,css]
+----
+div {
+    display: none;
+    display: inline;
+    display: block;
+    display: inline-block;
+    display: flex;
+}
+----
+
+* none : le composant n'est plus visible dans le HTML et sa place est occupée par autre chose
+* inline : pour que le composant se comporte comme un élément `inline`
+* block : pour que le composant se comporte comme un élément `block`
+* inline-block : pour une élément `inline` dont on veut fixer la largeur et la hauteur 
+* flex : pour être capable d'arranger les enfants comme on veut (cf https://www.w3schools.com/css/css3_flexbox.asp[Flex Box])
+
 === La superposition
 
 [#zindex-css.css]
@@ -922,11 +942,9 @@ image::images/rwd_phone.png[img-responsivePhone]
 Ce sont des points de départ, mais il faut faire attention ! Ils ne fonctionnent pas toujours comme on le veut et les
 adapter devient vite très compliqué.
 
-
 .Framework
 [#img-framework]
 image::images/framework.png[img-framework]
-
 
 === Bootstrap
 
@@ -940,3 +958,475 @@ plus simple la compréhension de la navigation.
 
 == Le JavaScript
 
+Le javacript est un language de script qui s'exécute sur le navigateur Web. Il permet d'interagir avec le HTML présent dans la page
+en modifiant des éléments, en ajoutant ou en en supprimant.
+
+=== Vanilia JS
+
+On appelle Vanilia JS le code javascript qui n'utilise pas de bibliothèque / framework type JQuery. C'est le javascript de base des navigateurs.
+Beaucoup d'entreprises y reviennent car les bibliothèques ajoutent une lenteur et une surcharge sur les navigateurs et la charge réseau.
+
+Voici quelques objets `JS` de base.
+
+==== Window
+
+L'interface https://developer.mozilla.org/en-US/docs/Web/API/Window[Windows] permet d'accéder à certain éléments du navigateur. Voici quelques exemples :
+
+* la taille de la fenêtre : `Window.outerHeight`, `Window.outerWidth` (https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight[see here for outerHeight] and https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth[here for outerWidth])
+* la taille visible dans la fenêtre : `Window.innerHeight`, `Window.innerWidth` (https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight[see here] and https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth[here for outerWidth])
+* modifier la taille de la fenêtre : `Window.resizeTo`, `Window.resizeBy` (https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo[see here] and https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy[here for resizeBy])
+* la position du scroll de la fenêtre : `Window.scrollX`, `Window.scrollY` - le point (0,0 en haut à gauche), le X de la gauche vers la droite, le Y du haut vers le bas (https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX[see here for scrollX] and https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY[here for scrollY])
+* l'URL de la page : `Window.location` (https://developer.mozilla.org/en-US/docs/Web/API/Location[see here])
+* l'historique de navigation : `Window.history` (https://developer.mozilla.org/en-US/docs/Web/API/History_API[see here])
+
+==== Document
+
+L'interface https://developer.mozilla.org/en-US/docs/Web/API/Document[Document] permet d'accéder au DOM (**D**ata **O**bject **M**odel) de la page.
+Voici un exemple de ce que l'on peut faire avec l'interface Document : https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core[Using DOM]
+
+==== Console
+
+La https://developer.mozilla.org/en-US/docs/Web/API/Console[console] permet d'avoir des messages dans le navigateur pour vous aider à Debugger. 
+Mais la plus part des navigateurs actuels viennent avec un Debugger intégré. Reste à savoir s'en servir ;) 
+
+.JS Debugger
+[#img-debug]
+image::images/debugger.png[img-debug]
+
+==== Accès à un élément
+
+Voici comment accéder à un élément par son ID et ajouter/changer du contenu et modifier le style qui lui est appliqué. 
+
+.simple-js.html
+[#simplejs.html]
+[source,html]
+----
+include::sample/simple-js.html[]
+----
+
+.simple-js.js
+[#simple-js.js]
+[source,js]
+----
+include::sample/simple-js.js[]
+----
+
+==== Mots clés
+
+.Keywords
+|===
+|Keyword	|Description
+
+|break	
+|Termine un switch ou un loop
+
+|continue	
+|Recommence la boucle avec l'élément suivant
+
+|debugger	
+|Arrête l'exécution du JavaScript, et appel (si possible) le debugger
+
+|do ... while	
+|Exécute un bloc de code et répète ce block, tant que la condition est true
+
+|for	
+|Marque un bloc de code pour être exécuté tant que la condition est true
+
+|function	
+|Déclare une fonction
+
+|if ... else
+|Marque un block pour être exécuté selon une condition
+
+|return	
+|Sort d'une fonction
+
+|switch	
+|Marque un bloc de code pour être exécuté selon une condition
+
+|try ... catch	
+|Crée un bloc de gestion des erreurs
+
+|var	
+|Déclare une variable
+|===
+
+==== Comparaison
+
+|===
+|Opérateur |Description
+
+| ==
+| égal à (`1 == 1` => `true`, `1 == "1"` => `true`)
+
+| ===
+| égal à, en valeur et type (`1 == 1` => `true`, `1 == "1"` => `false`)
+
+| !=
+| différent de
+
+| !==
+| différent de, en valeur et en type
+
+| >
+| plus grand que
+
+| <
+| plus petit que
+
+| >=
+| suppérieur ou égal à
+
+| <=
+| inférieur ou égal à
+
+| ?
+| opérateur ternaire (`new Date().getDay() == 6 ? "Sleeping late" : "Getup early"`)
+|===
+
+==== Fonction
+
+Voici comment déclarer et appeler une fonction :
+
+.function.js
+[#function.js]
+[source,js]
+----
+function product(p1, p2) {
+  return p1 * p2;    // The function returns the product of p1 and p2
+}
+
+var maVar = product(2, 5);
+----
+
+==== Objet
+
+Voici un exemple de data object (il ne comporte que des données):
+
+.object.js
+[#object.js]
+[source,js]
+----
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+var person2 = {firstName:"Albert", lastName:"Einstein", age:50, eyeColor:"blue"};
+
+person2.firstName = person.firstName
+person2["lastName"] = person["lastName"]
+----
+
+==== Tableau
+
+Voici comment déclarer un tableau:
+
+.array.js
+[#array.js]
+[source,js]
+----
+var cars = ["Saab", "Volvo", "BMW"];
+
+var name = cars[0]; // Starts at 0
+myCars[0] = "Opel";
+----
+
+Voici comment on peut boucler sur les élements d'un tableau :
+
+.array-loop.js
+[#arrayLoop.js]
+[source,js]
+----
+var fruits, text, fLen, i;
+fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.push("Lemon");
+var arrLength = fruits.length;
+
+text = "<ul>";
+for (i = 0; i < arrLength; i++) {
+    text += "<li>" + fruits[i] + "</li>";
+}
+text += "</ul>";
+----
+
+==== Code Structure
+
+.codeStructure.js
+[#codeStructure.js]
+[source,js]
+----
+// if
+if (hour < 18) {
+  greeting = "Good day";
+} else {
+  greeting = "Good evening";
+}
+
+// switch
+switch (new Date().getDay()) {
+  default: 
+    text = "Looking forward to the Weekend";
+    break;
+  case 6:
+    text = "Today is Saturday";
+    break; 
+  case 0:
+    text = "Today is Sunday";
+}
+
+// for
+for (i = 0; i < 5; i++) {
+  text += "The number is " + i + "<br>";
+}
+
+for (x in fruits) {
+  text += fruits[x] + ', ';
+}
+
+// while
+while (i < 10) {
+  text += "The number is " + i;
+  i++;
+}
+
+do {
+  text += "The number is " + i;
+  i++;
+}
+while (i < 10);
+----
+
+==== Evènements
+
+Voici une liste des évènements courants :
+
+|===
+|Event	|Description
+
+|onchange
+|un élément HTML a été modifié (par exemple une valeur dans un champ de formulaire)
+
+|onclick
+|L'utilisateur clic sur une element
+
+|onmouseover
+|L'utilisateur place le pointeur de la souris au dessus d'un élément HTML
+
+|onmouseout
+|L'utilisateur bouge la souris en dehors d'une élément HTML
+
+|onkeydown
+|L'utilisateur presse une touche du clavier
+
+|onload
+|Le navigateur a terminé de charger tous les éléments de la page
+|===
+
+==== Bonnes pratiques
+
+Il vaut mieux déclarer les fichiers JavaScript à la fin du BODY pour permettre l'affichage plus rapide de la page. En effet, leur compilation prend du temps.
+Or quand les fichiers sont inclus en haut de la page, le navigateur va les compiler avant de faire le rendu de la page.
+
+On peut aussi différer l'exécution d'un script en attendant l'évènement `onload`.
+
+.onload.js
+[#onload.js]
+[source,js]
+----
+<script>
+window.onload = function() {
+  var element = document.createElement("script");
+  element.src = "<p>Loaded!</p>";
+  document.body.appendChild(element);
+};
+</script>
+----
+
+==== Classes
+
+Voici un exemple d'utilisation des classes en JavaScript.
+
+Dans notre page HTML on déclare une div `div-client` qui servira de conteneur pour notre affichage et on inclus les deux fichiers scripts.
+
+.jsclasses.html
+[#htmlclasses.html]
+[source,html]
+----
+include::sample/jsclasses.html[]
+----
+
+Dans le premier fichier script, nous avons deux classes, Client et Address. Un client peut avoir une collection d'addresses. 
+Parmis ces addresses l'une peut être celle par défaut.
+
+.jsclient-classes.js
+[#jsclientclasses.js]
+[source,js]
+----
+include::sample/jsclient-classes.js[]
+----
+
+Dans cette partie de script, on instancie deux Address et un Client. On affecte les deux Address au client, sachant que l'une sera son Address par défaut.
+Puis on affiche le nom et le prénom du client et son adresse favorite.
+
+.jsclasses.js
+[#jsclasses.js]
+[source,js]
+----
+include::sample/jsclasses.js[]
+----
+
+Et voilà le résultat :
+
+.Resultat
+[#img-jsclasses]
+image::images/jsclasses.png[]
+
+=== JQuery
+
+C'est une bibliothèque permettant d'accélerer les développements et de faciliter la vie des développeurs : https://jquery.com/[JQuery]
+
+.onreadyJQuery.js
+[#onreadyJQuery.js]
+[source,js]
+----
+<script>
+$(document).ready(function(){
+    $("p").click(function(){
+        $(this).hide();
+    });
+});
+</script>
+----
+
+==== Sélection
+
+Sa grande force réside dans la puissance de son sélecteur d'élément `$()`:
+
+|===
+|Syntax	|Description
+
+|$("*")
+|Selects all elements
+
+|$(this)
+|Selects the current HTML element
+
+|$("p.intro")
+|Selects all <p> elements with class="intro"
+
+|$("p:first")
+|Selects the first <p> element
+
+|$("ul li:first")
+|Selects the first <li> element of the first <ul>
+
+|$("ul li:first-child")
+|Selects the first <li> element of every <ul>
+
+|$("[href]")
+|Selects all elements with an href attribute
+
+|$("a[target='_blank']")
+|Selects all <a> elements with a target attribute value equal to "_blank"
+
+|$("a[target!='_blank']")
+|Selects all <a> elements with a target attribute value NOT equal to "_blank"
+
+|$(":button")
+|Selects all <button> elements and <input> elements of type="button"
+
+|$("tr:even")
+|Selects all even <tr> elements
+
+|$("tr:odd")
+|Selects all odd <tr> elements
+|===
+
+==== Ajax
+
+Voici un exemple d'utilisation de JQuery pour effectuer une requête AJAX :
+
+.ajaxJQuery.js
+[#ajaxJQuery.js]
+[source,js]
+----
+$.ajax({
+   url: 'http://api.joind.in/v2.1/talks/10889',
+   type: 'GET',
+   data: {
+      format: 'json'
+   },
+   error: function() {
+      $('#info').html('<p>An error has occurred</p>');
+   },
+   success: function(data) {
+      var $title = $('<h1>').text(data.talks[0].talk_title);
+      var $description = $('<p>').text(data.talks[0].talk_description);
+      $('#info')
+         .append($title)
+         .append($description);
+   },
+});
+----
+
+==== Node JS
+
+ $>mkdir itunes
+ $>cd itunes
+ $>npm init
+
+ Press ^C at any time to quit.
+ name: (itunes)
+ version: (1.0.0)
+ description:
+ entry point: (index.js) server.js
+ test command:
+ git repository:
+ keywords:
+ author:
+ license: (ISC)
+ 
+ $> npm i express --save
+ $> touch server.js
+ $> mkdir public
+ $> cd public
+ $> touch search.html
+ $> touch search.js
+ $> touch search.css
+
+.server.js
+[#server.js]
+[source,js]
+----
+include::itunes/server.js[]
+----
+
+.search.html
+[#searchhtml.html]
+[source,html]
+----
+include::itunes/public/search.html[]
+----
+
+.search.css
+[#searchcss.css]
+[source,css]
+----
+include::itunes/public/search.css[]
+----
+
+.search.js
+[#search.js]
+[source,js]
+----
+include::itunes/public/search.js[]
+----
+
+Démarrons le serveur :
+
+ node server.js
+
+Resultat visible ici :
+
+ http://localhost:3000/search.html
+
+.iTunes Search
+[#img-itunessearch]
+image::images/itunesSearch.png[]
